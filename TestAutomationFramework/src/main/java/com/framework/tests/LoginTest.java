@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.framework.base.BaseTest;
 import com.framework.pages.HomePage;
 import com.framework.pages.LoginPage;
+import com.framework.pages.ProductDetailPage;
 
 public class LoginTest extends BaseTest {
 
@@ -22,8 +23,18 @@ public class LoginTest extends BaseTest {
 	            "Login failed");
 
 	    HomePage home  = new HomePage(driver);
-	    String header = home.getHeaderText();
-	    Assert.assertEquals(header, "Products");
+	    home.clickOnFirstProduct();
+	    Thread.sleep(3000);
+	    System.out.println("After url login: " + driver.getCurrentUrl());
+	    ProductDetailPage pdp = new ProductDetailPage(driver);
+	    pdp.addProductToCart();
+	    System.out.println("After url login: " + driver.getCurrentUrl());
+	    
+	    int cartCount = home.getCartCount();
+	    System.out.println("Cart Count: " + cartCount);
+	    Assert.assertEquals(cartCount, 1, "Product not added to cart");
+//	    String header = home.getHeaderText();
+//	    Assert.assertEquals(header, "Products");
 	    
 	    
 	}
