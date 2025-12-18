@@ -11,6 +11,8 @@ public class HomePage {
 
 	private WebDriver driver;
 	private By productsHeader = By.className("title");
+	private By cartBadge = By.className("shopping_cart_badge");
+	private By firstProduct = By.className("inventory_item_name");
 	
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
@@ -23,4 +25,18 @@ public class HomePage {
 				ExpectedConditions.visibilityOfElementLocated(productsHeader)
 				).getText();
 	}
+	
+	public int getCartCount() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//		String count = wait.until(
+//				ExpectedConditions.visibilityOfElementLocated(cartBadge)
+//				).getText();
+		
+		return Integer.parseInt(driver.findElement(cartBadge).getText());
+	}
+	
+	public void clickOnFirstProduct() {
+		driver.findElement(firstProduct).click();
+	}
+	
 }

@@ -12,10 +12,12 @@ public class ExtentManager {
 			String reportPath = System.getProperty("user.dir") + "/test-output/ExtentReport.html";
 			ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
 			spark.config().setReportName("Automation Test Report");
+			spark.config().setDocumentTitle("Selenium Test Results");
 			extent = new ExtentReports();
 			extent.attachReporter(spark);
-			extent.setSystemInfo("Enviroment", "QA");
+			extent.setSystemInfo("Environment", "QA");
 			extent.setSystemInfo("Author", "Shreyansh");
+			extent.setSystemInfo("Framework", "Selenium + TestNG");
 		}
 		return extent;
 	}
